@@ -3,7 +3,6 @@ var app = express();
 
 let absolutePath = __dirname + '/views/index.html';
 let assetsPath = __dirname + '/public';
-
 app.use('/public',express.static(assetsPath));
 
 app.get('/', function(req, res) {
@@ -11,7 +10,12 @@ app.get('/', function(req, res) {
 })
 
 app.get('/json', function(req, res) {
-  res.json({"message": "Hello json"});
+  let response = "Hello json";
+  if (process.env.MESSAGE_STYLE === "uppercase") {
+    response = response.toUpperCase();  
+  }
+  res.json({"message": response});
+
 })
 
 
