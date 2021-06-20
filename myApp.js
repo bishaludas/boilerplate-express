@@ -6,6 +6,7 @@ let absolutePath = __dirname + "/views/index.html";
 let assetsPath = __dirname + "/public";
 app.use("/public", express.static(assetsPath));
 app.use(bodyParser.urlencoded({extended: false}) );
+app.use(bodyParser.json());
 
 //logging before each request
 app.use(function (req, res, next) {
@@ -48,7 +49,17 @@ app.get("/:word/echo", function (req, res) {
 app.get("/name", function (req, res) {
   let fname = req.query.first;
   let lname = req.query.last;
+  res.json({ echo: req.params.word });
   res.json({ name: `${fname} ${lname}` });
 });
+
+//query string parameter
+app.post("/name", function (req, res) {
+  let fname = req.body.first;
+  let lname = req.body.last;
+  res.json({ name: `${fname} ${lname}` });
+});
+
+
 
 module.exports = app;
