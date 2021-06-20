@@ -1,9 +1,11 @@
 var express = require("express");
+var bodyParser = require('body-parser');
 var app = express();
 
 let absolutePath = __dirname + "/views/index.html";
 let assetsPath = __dirname + "/public";
 app.use("/public", express.static(assetsPath));
+app.use(bodyParser.urlencoded({extended: false}) );
 
 //logging before each request
 app.use(function (req, res, next) {
@@ -44,10 +46,9 @@ app.get("/:word/echo", function (req, res) {
 
 //query string parameter
 app.get("/name", function (req, res) {
-    let fname = req.query.first;
-    let lname = req.query.last;
-  res.json({ name: `${fname} ${lname}`});
+  let fname = req.query.first;
+  let lname = req.query.last;
+  res.json({ name: `${fname} ${lname}` });
 });
-
 
 module.exports = app;
