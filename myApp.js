@@ -44,11 +44,9 @@ app.get("/:word/echo", function (req, res) {
 
 //query string parameter
 app.post("/name", function (req, res) {
-    let uname = "";
-    if (req.query.first && req.query.last) {
-        uname= `${req.query.first} ${req.query.last}`
-    }
-  res.json({ name: uname});
+    let fname = req.query.first;
+    let lname = req.query.last;
+  res.json({ name: `${fname} ${lname}`});
 });
 
 
